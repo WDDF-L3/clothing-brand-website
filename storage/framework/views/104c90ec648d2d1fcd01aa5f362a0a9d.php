@@ -1,4 +1,4 @@
-<article class="product-card">
+<article class="product-card" style="padding:10px; border:1px solid var(--border); border-radius:4px; background:#fff; position:relative;">
     <?php if($product->discount_percent > 0): ?>
         <div class="badge-sale">-<?php echo e($product->discount_percent); ?>%</div>
     <?php endif; ?>
