@@ -53,13 +53,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Products
         Route::prefix('products')->name('products.')->group(function () {
-            Route::get('/',                           [AdminProductController::class, 'index'])->name('index');
-            Route::get('/create',                     [AdminProductController::class, 'create'])->name('create');
-            Route::post('/',                          [AdminProductController::class, 'store'])->name('store');
-            Route::get('/{product}/edit',             [AdminProductController::class, 'edit'])->name('edit');
-            Route::put('/{product}',                  [AdminProductController::class, 'update'])->name('update');
-            Route::delete('/{product}',               [AdminProductController::class, 'destroy'])->name('destroy');
-            Route::patch('/{product}/toggle-active',  [AdminProductController::class, 'toggleActive'])->name('toggle-active');
+            Route::get('/',[AdminProductController::class, 'index'])->name('index');
+            Route::get('/create',[AdminProductController::class, 'create'])->name('create');
+            Route::post('/',[AdminProductController::class, 'store'])->name('store');
+            Route::get('/{product}/edit',[AdminProductController::class, 'edit'])->name('edit');
+            Route::put('/{product}',[AdminProductController::class, 'update'])->name('update');
+            Route::delete('/{product}',[AdminProductController::class, 'destroy'])->name('destroy');
+            Route::patch('/{product}/toggle-active',[AdminProductController::class, 'toggleActive'])->name('toggle-active');
         });
 
         // Orders

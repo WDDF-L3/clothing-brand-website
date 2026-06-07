@@ -11,10 +11,8 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $categories = Category::active()->withCount('products')->get();
-
         $query = Product::active()->inStock()->with('category');
 
-        // Search
         if ($search = $request->get('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
@@ -22,17 +20,14 @@ class ProductController extends Controller
             });
         }
 
-        // Filter by category
         if ($categorySlug = $request->get('category')) {
             $query->whereHas('category', fn ($q) => $q->where('slug', $categorySlug));
         }
 
-        // Filter by size
         if ($size = $request->get('size')) {
             $query->whereJsonContains('sizes', $size);
         }
 
-        // Sort
         match ($request->get('sort', 'newest')) {
             'price_asc'  => $query->orderBy('price', 'asc'),
             'price_desc' => $query->orderBy('price', 'desc'),
