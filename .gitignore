@@ -1,0 +1,50 @@
+# Laravel core - NEVER commit these
+/.env
+/vendor/
+
+# Compiled & cached files
+/bootstrap/cache/*.php
+/public/storage
+/public/hot
+
+# Storage (except structure placeholders)
+/storage/app/public/*
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+
+# Keep directory structure with .gitkeep
+!storage/app/.gitkeep
+!storage/app/public/.gitkeep
+!storage/framework/.gitkeep
+!storage/framework/cache/.gitkeep
+!storage/framework/cache/data/.gitkeep
+!storage/framework/sessions/.gitkeep
+!storage/framework/views/.gitkeep
+!storage/logs/.gitkeep
+!bootstrap/cache/.gitkeep
+!public/.gitkeep
+
+# Node / npm
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Testing
+.phpunit.result.cache
+coverage/
+
+# Build artifacts
+/public/build/
+/public/mix-manifest.json

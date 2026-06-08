@@ -10,12 +10,6 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
 // Home / Shop
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/shop', [ProductController::class, 'index'])->name('shop');
@@ -38,7 +32,7 @@ Route::prefix('checkout')->name('checkout.')->group(function () {
     Route::get('/success/{order}', [CheckoutController::class, 'success'])->name('success');
 });
 
-// ─── Admin ────────────────────────────────────────────────────────────────────
+// ─── Admin Routes 
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Auth (no middleware)
