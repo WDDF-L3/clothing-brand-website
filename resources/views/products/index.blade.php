@@ -18,10 +18,34 @@
             </p>
             <a href="{{ route('shop') }}" class="btn btn-accent">Shop the Collection</a>
         </div>
+
+        {{-- Featured product image grid --}}
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px;">
             @foreach($featured->take(4) as $p)
-            <a href="{{ route('products.show', $p) }}" style="aspect-ratio:3/4; overflow:hidden; background:var(--warm); display:block;">
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;color:#7a736b;text-align:center;padding:12px;">{{ $p->name }}</div>
+            <a href="{{ route('products.show', $p) }}"
+               style="aspect-ratio:3/4; overflow:hidden; background:var(--warm); display:block; position:relative;">
+
+                @if(!empty($p->images) && count($p->images) > 0)
+                    {{-- Show actual product image --}}
+                    <img src="{{ $p->images[0] }}"
+                         alt="{{ $p->name }}"
+                         style="width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;"
+                         onmouseover="this.style.transform='scale(1.05)'"
+                         onmouseout="this.style.transform='scale(1)'">
+                @else
+                    {{-- Fallback: show product name as placeholder --}}
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;color:#7a736b;text-align:center;padding:12px;">
+                        {{ $p->name }}
+                    </div>
+                @endif
+
+                {{-- Product name overlay on hover --}}
+                <div style="position:absolute; bottom:0; left:0; right:0; padding:12px; background:linear-gradient(transparent, rgba(0,0,0,0.5)); opacity:0; transition:opacity .3s;"
+                     onmouseover="this.style.opacity='1'"
+                     onmouseout="this.style.opacity='0'">
+                    <p style="color:white; font-size:12px; letter-spacing:.08em; margin:0;">{{ $p->name }}</p>
+                </div>
+
             </a>
             @endforeach
         </div>

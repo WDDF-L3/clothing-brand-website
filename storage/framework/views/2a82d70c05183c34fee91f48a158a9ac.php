@@ -16,10 +16,35 @@
             </p>
             <a href="<?php echo e(route('shop')); ?>" class="btn btn-accent">Shop the Collection</a>
         </div>
+
+        
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px;">
             <?php $__currentLoopData = $featured->take(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <a href="<?php echo e(route('products.show', $p)); ?>" style="aspect-ratio:3/4; overflow:hidden; background:var(--warm); display:block;">
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;color:#7a736b;text-align:center;padding:12px;"><?php echo e($p->name); ?></div>
+            <a href="<?php echo e(route('products.show', $p)); ?>"
+               style="aspect-ratio:3/4; overflow:hidden; background:var(--warm); display:block; position:relative;">
+
+                <?php if(!empty($p->images) && count($p->images) > 0): ?>
+                    
+                    <img src="<?php echo e($p->images[0]); ?>"
+                         alt="<?php echo e($p->name); ?>"
+                         style="width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;"
+                         onmouseover="this.style.transform='scale(1.05)'"
+                         onmouseout="this.style.transform='scale(1)'">
+                <?php else: ?>
+                    
+                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;color:#7a736b;text-align:center;padding:12px;">
+                        <?php echo e($p->name); ?>
+
+                    </div>
+                <?php endif; ?>
+
+                
+                <div style="position:absolute; bottom:0; left:0; right:0; padding:12px; background:linear-gradient(transparent, rgba(0,0,0,0.5)); opacity:0; transition:opacity .3s;"
+                     onmouseover="this.style.opacity='1'"
+                     onmouseout="this.style.opacity='0'">
+                    <p style="color:white; font-size:12px; letter-spacing:.08em; margin:0;"><?php echo e($p->name); ?></p>
+                </div>
+
             </a>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
@@ -78,5 +103,4 @@
 </section>
 
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\New folder (2)\fashion-store\fashion-store\resources\views/products/index.blade.php ENDPATH**/ ?>
